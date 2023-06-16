@@ -1,8 +1,9 @@
-﻿using Data.Expense.Models;
+﻿using Data.Contracts;
+using Data.Expense.Models;
 
 namespace Data.IRepositories
 {
-    public interface ICurrencyRepository : IRepository<Currency>
+    public interface ICurrencyRepository : IMappedRepository<Currency>, IRepository<Currency>
     {
 
     }

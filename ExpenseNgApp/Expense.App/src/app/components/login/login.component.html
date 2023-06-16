@@ -1,0 +1,54 @@
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card m-3 p-2">
+                <div class="text-center">
+                    <h4>Login</h4>
+                </div>
+                <form [formGroup]="fg">
+                    
+                    <div class="form-group mt-2">
+                        <div class="input-field" [class.error]="fg.controls['email'].dirty && fg.hasError('required', 'email')">
+                            <span class="fa fa-solid fa-user p-2"></span>
+                            <input autofocus formControlName="email" type="email" id="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <small *ngIf="fg.controls['email'].dirty && fg.hasError('required', 'email')" class="text-danger">* email required</small>
+                    <div *ngIf="fg.controls['email'].dirty && fg.controls['email'].errors?.serverErrors" class="text-danger">
+                        <small *ngFor="let error of fg.controls['email'].errors?.serverErrors">* {{error}}</small>
+                    </div>
+                    
+                    <div class="form-group mt-2">
+                        <div class="input-field" [class.error]="fg.controls['password'].dirty &&  fg.hasError('required', 'password')">
+                            <span class="fa fa-solid fa-lock p-2"></span>
+                            <input formControlName="password" [type]="passwordInput.inputType" id="password" placeholder="Password">
+                            <span (mouseup)="passwordInput.togglePasswordEye()" (mousedown)="passwordInput.togglePasswordEye()" class="fa fa-solid {{passwordInput.eyeClass}}"></span>
+                        </div>
+                    </div>
+                    <small *ngIf="fg.controls['password'].dirty && fg.hasError('required', 'password')" class="text-danger">* password required</small>
+                    <div *ngIf="fg.controls['password'].dirty && fg.controls['password'].errors?.serverErrors" class="text-danger">
+                        <small *ngFor="let error of fg.controls['password'].errors?.serverErrors">* {{error}}</small>
+                    </div>
+                    
+                    <div class="text-end mt-2">
+                        <small><a style="text-decoration: none;" [routerLink]="['', '/login']">forgotten password?</a></small>
+                    </div>
+
+                    <div class="mb-3">
+                        <button *ngIf="!isLoggingIn" (click)="onSubmit()" type="submit" class="btn btn-primary btn-block mt-4 w-100">Login</button>
+                        <button *ngIf="isLoggingIn" class="btn btn-primary btn-block mt-4 w-100" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
+                    </div>
+                    
+                    <div class="text-center">
+                        <small>Don't have an account? <a style="text-decoration: none;" [routerLink]="['', 'register']">Sign up</a></small>
+                    </div>
+                
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,7 +5,7 @@ using Data.Expense.Models;
 
 namespace Data.Expense.Repositories
 {
-    public class CurrencyRepository : Repository<Currency, ExpenseContext>, ICurrencyRepository
+    public class CurrencyRepository : MappedRepository<Currency, ExpenseContext>, ICurrencyRepository
     {
         public CurrencyRepository(ExpenseContext context, IMapper mapper) : base(context, mapper)
         {

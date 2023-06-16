@@ -1,23 +1,17 @@
-﻿using AutoMapper;
-using models = Data.Expense.Models;
-using Data.Expense.ViewModels.Create;
-using Data.Expense.ViewModels.Read;
+﻿using MODELS = Data.Expense.Models;
+using Data.Mapping;
+using Data.Expense.DTOs;
 
-namespace Data.Mapping
+namespace Data.Expense.Mapping
 {
-    public class MappingConfiguration : Profile
+    public class MappingConfiguration : MappingConfigurationBase
     {
         public MappingConfiguration()
         {
             // CreateMap<ClassA, ClassAView>().ReverseMap();
-            CreateMap<models.Currency, ReadCurrency>().ReverseMap();
-            CreateMap<models.Currency, CreateCurrency>().ReverseMap();
-            CreateMap<models.Currency, UpdateCurrency>().ReverseMap();
-
-            CreateMap<models.Category, CreateCategory >().ReverseMap();
-            CreateMap<models.Expense, CreateExpense>().ReverseMap();
-
-
+            CreateMap<MODELS.Currency, CurrencyDto>().ReverseMap();
+            CreateMap<MODELS.Category, CategoryDto>().ReverseMap();
+            CreateMap<MODELS.Expense, ExpenseDto>().ReverseMap();
         }
     }
 }

@@ -1,54 +1,61 @@
-﻿using Data.Expense.ViewModels.Create;
-using Data.Expense.ViewModels.Read;
+﻿using Data;
+using Data.Expense.DTOs;
+using Data.Expense.Models;
 using Data.IRepositories;
+using Data.ValidationFilters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace API.Expense.Controllers
 {
+    [ServiceFilter(type: typeof(ValidationFilterAttribute))]
     [Route("api/[controller]")]
     [ApiController]
     public class CurrencyController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IExpenseUnitOfWork _unitOfWork;
         private readonly ILogger<CurrencyController> _logger;
 
-        public CurrencyController(IUnitOfWork unitOfWork, ILogger<CurrencyController> logger) 
+        public CurrencyController(IExpenseUnitOfWork unitOfWork, ILogger<CurrencyController> logger) 
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
         }
         
-        // GET: api/<CurrencyController>
+        // GET: api/currency
         [HttpGet]
-        public async Task<ActionResult<IList<ReadCurrency>>> Get()
+        public async Task<ActionResult<IList<Currency>>> Get()
         {
-            var currencies = await _unitOfWork.CurrencyRepository.GetAll<ReadCurrency>();
+            var currencies = await _unitOfWork.CurrencyRepository.GetAll();
 
             return Ok(currencies);
         }
 
-        // GET api/<CurrencyController>/5
+        // GET api/currency/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ReadCurrency>> Get(int id)
+        public async Task<ActionResult<Currency>> Get(int id)
         {
-            return await _unitOfWork.CurrencyRepository.Get<ReadCurrency>(c => c.Id == id);
+            var currency = await _unitOfWork.CurrencyRepository.Get(c => c.Id == id);
+            return Ok(currency);
         }
 
-        // POST api/<CurrencyController>
+        // POST api/currency
         [HttpPost]
-        public async Task<ActionResult> Post(CreateCurrency currency)
+        [Authorize]
+        public async Task<IActionResult> Post(CurrencyDto currencyDto)
         {
-            await _unitOfWork.CurrencyRepository.Add(currency);
+            var currency = await _unitOfWork.CurrencyRepository.Add(currencyDto);
             await _unitOfWork.SaveChanges(HttpContext);
 
             return Ok(currency);
         }
 
-        // PUT api/<CurrencyController>/5
+        // PUT api/currency/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, UpdateCurrency currency)
+        [Authorize]
+        public async Task<IActionResult> Put(int id, Currency currency)
         {
             if (id != currency.Id)
                 return BadRequest();
@@ -59,9 +66,10 @@ namespace API.Expense.Controllers
             return Ok(currency);
         }
 
-        // DELETE api/<CurrencyController>/5
+        // DELETE api/currency/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        [Authorize(Roles = SD.RolesAdmin)]
+        public async Task<IActionResult> Delete(int id)
         {
             await _unitOfWork.CurrencyRepository.Delete(id);
             await _unitOfWork.SaveChanges(HttpContext);

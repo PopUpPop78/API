@@ -11,6 +11,7 @@ namespace Data.Configuration
             builder.HasData(
                 new IdentityRole
                 {
+                    Id = "36327073-6329-4DC2-98EC-249B6375C623",
                     Name = "Admin",
                     NormalizedName = "ADMIN"
                 },

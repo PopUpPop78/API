@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <span><a class="navbar-brand px-2" href="" [routerLink]="['', 'dashboard']">Expenses</a></span>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown" *ngIf="isAdmin">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Static Data
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item py-1" style="color:#0d6efd" (click)="manageCurrencies()"><i class="fa-solid fa-coins"></i> Currencies</a></li>
+            <li><a class="dropdown-item py-1" style="color:#0d6efd" (click)="manageCategories()"><i class="fa fa-solid fa-user"></i> Categories</a></li>
+            <li><a class="dropdown-item py-1" style="color:#0d6efd" (click)="manageUsers()"><i class="fa fa-solid fa-user"></i> Users</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            User Management
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item py-1" style="color:#0d6efd" (click)="signOut()"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="d-flex">
+        <span style="color:aliceblue">{{lastFirstName}}</span> 
+      </div>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

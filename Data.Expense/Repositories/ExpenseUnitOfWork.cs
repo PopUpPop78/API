@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Data.IRepositories;
-using Data.UnitOfWork;
+using Data.Repositories;
 
 namespace Data.Expense.Repositories
 {
-    public class ExpenseUnitOfWork : UnitOfWork<ExpenseContext>
+    public class ExpenseUnitOfWork : UnitOfWork<ExpenseContext>, IExpenseUnitOfWork
     {
         public IExpenseRepository ExpenseRepository { get; }
         public ICategoryRepository CategoryRepository { get; }

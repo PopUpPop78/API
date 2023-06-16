@@ -1,8 +1,9 @@
-﻿using Data.Expense.Models;
+﻿using Data.Contracts;
+using Data.Expense.Models;
 
 namespace Data.IRepositories
 {
-    public interface ICategoryRepository : IRepository<Category>
+    public interface ICategoryRepository : IMappedRepository<Category>, IRepository<Category>
     {
 
     }

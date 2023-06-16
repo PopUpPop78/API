@@ -1,0 +1,43 @@
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card m-3 p-2">
+                <div class="text-center">
+                    <h4>Add Category</h4>
+                </div>
+                <form [formGroup]="fg">
+                    
+                    <div class="form-group mt-2">
+                        <div class="input-field" [class.error]="fg.controls['name'].dirty && fg.hasError('required', 'name')">
+                            <input autofocus formControlName="name" type="text" id="name" placeholder="Name">
+                        </div>
+                    </div>
+                    <small *ngIf="fg.controls['name'].dirty && fg.hasError('required', 'name')" class="text-danger">* name required</small>
+                    <div *ngIf="fg.controls['name'].dirty && fg.controls['name'].errors?.serverErrors" class="text-danger">
+                        <small *ngFor="let error of fg.controls['name'].errors?.serverErrors">* {{error}}</small>
+                    </div>
+                    
+                    <div class="form-group mt-2">
+                        <div class="input-field" [class.error]="fg.controls['description'].dirty &&  fg.hasError('required', 'description')">
+                            <input formControlName="description" type="text" id="description" placeholder="Description">
+                        </div>
+                    </div>
+                    <small *ngIf="fg.controls['description'].dirty && fg.hasError('required', 'description')" class="text-danger">* description required</small>
+                    <div *ngIf="fg.controls['description'].dirty && fg.controls['description'].errors?.serverErrors" class="text-danger">
+                        <small *ngFor="let error of fg.controls['description'].errors?.serverErrors">* {{error}}</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <button *ngIf="!isAdding" (click)="addCategory()" type="submit" class="btn btn-primary btn-block mt-4 w-100">Add</button>
+                        <button *ngIf="isAdding" class="btn btn-primary btn-block mt-4 w-100" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Adding...
+                        </button>
+                    </div>
+                
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

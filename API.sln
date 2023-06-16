@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Expense", "API.Expense\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{A6A99B8B-E7AB-49B0-B8CE-ABF56EA591A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Expense", "Data.Expense\Data.Expense.csproj", "{37F8F506-CE62-4618-A084-F888E46F8D3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Expense", "Data.Expense\Data.Expense.csproj", "{37F8F506-CE62-4618-A084-F888E46F8D3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

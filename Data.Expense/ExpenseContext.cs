@@ -1,6 +1,7 @@
 ﻿using Data;
 using Data.Expense.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 public class ExpenseContext : CoreContext<CoreUser>
 {
@@ -8,7 +9,7 @@ public class ExpenseContext : CoreContext<CoreUser>
     public DbSet<Currency> Currencies { get; set; }
     public DbSet<Category> Categories { get; set; } 
     
-    public ExpenseContext(DbContextOptions options) : base(options)
+    public ExpenseContext(DbContextOptions options, IConfiguration configuration) : base(options, configuration)
     {
 
     }

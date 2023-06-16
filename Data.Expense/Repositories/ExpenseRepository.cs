@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using models = Data.Expense.Models;
+using MODELS = Data.Expense.Models;
 using Data.IRepositories;
 using Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Expense.Repositories
 {
-    public class ExpenseRepository : Repository<models.Expense, ExpenseContext>, IExpenseRepository
+    public class ExpenseRepository : MappedRepository<MODELS.Expense, ExpenseContext>, IExpenseRepository
     {
         public ExpenseRepository(ExpenseContext context, IMapper autoMapper) : base(context, autoMapper)
         {
